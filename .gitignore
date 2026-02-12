@@ -1,0 +1,6 @@
+venv/
+__pycache__/
+*.py[cod]
+.vscode/
+*.png
+resultados_moe.txt
