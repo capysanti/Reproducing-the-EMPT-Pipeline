@@ -1,80 +1,105 @@
-# Reproduzindo EMPT: Pipeline para Processamento de Sinais de EEG
+# Reproducing the EMPT Pipeline: An Open-Source Approach to Motor-Imagery EEG Classification
 
-Este repositório contém a implementação do pipeline **EMPT** (EEG Mixture-of-Experts ProbSparse Transformer), desenvolvido como parte do **Trabalho de Conclusão de Curso em Engenharia da Computação na Universidade Federal de Pelotas (UFPel)**.
+This repository provides the implementation of the **EMPT** pipeline (EEG Mixture-of-Experts ProbSparse Transformer).
 
-O projeto foca na classificação de sinais de eletroencefalograma (EEG) para **Imaginação Motora (MI)**, utilizando uma arquitetura baseada em Transformers com mecanismos de eficiência e especialização de redes.
+The project focuses on the classification of electroencephalographic (EEG) signals for **Motor Imagery (MI)**, using a Transformer-based architecture with efficiency and specialization mechanisms.
 
+## Project Summary
 
+This work reproduces and organizes an end-to-end processing pipeline, from raw data acquisition to final classification. The EMPT model's key contribution lies in its combination of:
 
-## Resumo do Projeto
+- **ProbSparse Attention**: A variant of classical attention that reduces computational complexity by focusing on the query-key pairs with the highest information sparsity.
+- **Mixture-of-Experts (MoE)**: A layer that activates only a subgroup of "experts" (dense neural networks) for each sample, enabling greater learning capacity without a prohibitive computational cost.
 
-A pesquisa reproduz e organiza um pipeline de processamento ponta a ponta, desde a aquisição de dados brutos até a classificação final. O diferencial do modelo EMPT reside na combinação de:
-- **ProbSparse Attention**: Uma variante da atenção clássica que reduz a complexidade computacional ao focar nos pares query-key com maior "esparsidade" de informação.
-- **Mixture-of-Experts (MoE)**: Uma camada que ativa apenas um subconjunto de "especialistas" (redes neurais densas) para cada amostra, permitindo maior capacidade de aprendizado sem um custo computacional proibitivo.
+## System Requirements
 
-
-## Requisitos de Sistema
-
-O pipeline foi desenvolvido e testado utilizando **Python 3.8+**. Para garantir a reprodutibilidade dos resultados, as versões principais das bibliotecas utilizadas são:
+The pipeline was developed and tested using **Python 3.8+**. To ensure reproducibility of results, the versions of the main libraries are:
 
 * **TensorFlow**: `2.15.1`
 * **Braindecode**: `0.8.1`
 * **MNE**: `1.8.0`
 * **MOABB**: `1.2.0`
 * **Scikit-learn**: `1.5.2`
-* **Numpy**: `1.26.4`
+* **NumPy**: `1.26.4`
 * **Matplotlib**: `3.9.4`
 
-Mais detalhes em `requirements.txt`.
+More details are available in `requirements.txt`.
 
-## Estrutura de Arquivos
+## File Structure
 
-O código foi modularizado para seguir boas práticas de engenharia de software:
+The code was modularized to follow software engineering good practices:
 
-* `architecture.py`: Contém todas as camadas customizadas (`TopKMoE`, `ProbSparseAttention`) e a estrutura do modelo `EMPTModel`.
-* `preprocessing.py`: Funções para carregamento automático de datasets via MOABB e pré-processamento via Braindecode (filtros, normalização exponencial e janelamento).
-* `main.py`: Ponto de entrada do experimento. Coordena o K-Fold, o treinamento e a geração de gráficos.
+* `architecture.py`: Contains all custom layers (`TopKMoE`, `ProbSparseAttention`) and the model structure (`EMPTModel`).
+* `preprocessing.py`: Functions for automatically loading datasets via MOABB and preprocessing via Braindecode (filtering, exponential normalization and windowing).
+* `main.py`: Entry point of the experiment. Coordinates K-Fold, training and graph generation.
 
-## Tecnologias Utilizadas
+## Technologies Used
 
-* **TensorFlow/Keras**: Framework principal para Deep Learning.
-* **MNE-Python**: Processamento de dados neurofisiológicos.
-* **Braindecode**: Biblioteca especializada em Deep Learning para EEG.
-* **MOABB**: Mother of All BCI Benchmarks, utilizado para garantir a reprodutibilidade dos datasets.
+* **TensorFlow/Keras**: Main Deep Learning framework.
+* **MNE-Python**: Neurophysiological data processing.
+* **Braindecode**: Library specialized in Deep Learning for EEG.
+* **MOABB**: Mother of All BCI Benchmarks, used to guarantee dataset reproducibility.
 
-## Como Utilizar
+## How to Use
 
-### 1. Instalação das Dependências
+### 1. Installing Dependencies
 
-Bash:
-* `pip install -r requirements.txt`
+```bash
+pip install -r requirements.txt
+```
 
-ou:
-* `pip install tensorflow==2.15.1 braindecode==0.8.1 moabb==1.2.0 mne==1.8.0 scikit-learn==1.5.2 matplotlib==3.9.4`
+or:
 
+```bash
+pip install tensorflow==2.15.1 braindecode==0.8.1 moabb==1.2.0 mne==1.8.0 scikit-learn==1.5.2 matplotlib==3.9.4
+```
 
-### 2. Execução
+### 2. Execution
 
-Para iniciar o treinamento e a validação cruzada (K-Fold):
+To start training and K-Fold cross-validation:
 
-Bash:
-* `python main.py`
+```bash
+python main.py
+```
 
-## Resultados e Logs
-O pipeline gera automaticamente:
+## Results and Logs
 
-* `resultados_moe.txt`: Um log detalhado contendo a acurácia de cada fold por sujeito.
+The pipeline automatically generates:
 
-* `Gráficos de Treino`: Ficheiros .png com as curvas de Loss e Accuracy para cada etapa da validação.
+* `resultados_moe.txt`: A detailed log containing the accuracy of each fold per subject.
+* **Training plots**: `.png` files with Loss and Accuracy curves for each fold of the cross-validation.
 
-## Autoria
+## Academic Context
 
-* `Autor`: Santiago Del Valle Alvarez Martinez
+This repository originated as part of an undergraduate thesis (*Trabalho de Conclusão de Curso*) in Computer Engineering at the Federal University of Pelotas (UFPel), Brazil, under the supervision of Prof. Dr. Marilton Sanchotene de Aguiar (CDTec/UFPel). It has since been extended and published as a research paper at **BRACIS 2026**.
 
-* `Orientador`: Prof. Dr. Marilton Sanchotene de Aguiar
+## Citation
 
-* `Instituição`: Centro de Desenvolvimento Tecnológico (CDeTec) - UFPel
+If you use this code in your research, please cite the associated paper:
 
-* `Ano`: 2026
+```bibtex
+@inproceedings{martinez2026empt,
+  author    = {Martinez, Santiago Del Valle Alvarez and de Aguiar, Marilton Sanchotene},
+  title     = {Reproducing the EMPT Pipeline: An Open-Source Approach to Motor-Imagery EEG Classification},
+  booktitle = {Proceedings of the 15th Brazilian Conference on Intelligent Systems (BRACIS)},
+  year      = {2026},
+  address   = {Brazil}
+}
+```
 
-## Este trabalho é uma contribuição acadêmica para a área de Interfaces Cérebro-Computador (BCI).
+If you wish to cite the original undergraduate thesis specifically:
+
+```bibtex
+@thesis{martinez2026empt_tcc,
+  author  = {Martinez, Santiago Del Valle Alvarez},
+  title   = {Reproducing EMPT: An Open-Source Pipeline for Motor-Imagery EEG Classification},
+  school  = {Universidade Federal de Pelotas},
+  year    = {2026},
+  type    = {Undergraduate Thesis},
+  address = {Pelotas, Brazil}
+}
+```
+
+---
+
+*This repository is provided for research and reproducibility purposes in the field of Brain-Computer Interfaces (BCI).*
