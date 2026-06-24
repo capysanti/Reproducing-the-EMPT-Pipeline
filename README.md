@@ -91,7 +91,7 @@ If you wish to cite the original undergraduate thesis specifically:
 
 ```bibtex
 @thesis{martinez2026empt_tcc,
-  author  = {Martinez, Santiago Del Valle Alvarez},
+  author  = {Martinez, Santiago Del Valle Alvarez and de Aguiar, Marilton Sanchotene},
   title   = {Reproducing EMPT: An Open-Source Pipeline for Motor-Imagery EEG Classification},
   school  = {Universidade Federal de Pelotas},
   year    = {2026},
